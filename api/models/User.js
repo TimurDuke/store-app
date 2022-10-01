@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const {nanoid} = require('nanoid');
 
-const { Schema, model } = mongoose;
+const {Schema, model} = mongoose;
 
 const SALT_WORK_FACTOR = 10;
 
@@ -32,14 +32,20 @@ const UserSchema = new Schema({
         type: Number,
         required: true,
         unique: true,
-        validate: {
-            validator: async value => {
-                const user = await User.findOne({phone: parseInt(value)});
+        validate: [
+            {validator: async value => {
+                    const user = await User.findOne({phone: parseInt(value)});
 
-                if (user) return false;
+                    if (user) return false;
+                },
+                message: 'This phone is already registered'
             },
-            message: 'This phone is already registered',
-        }
+            {validator: async value => {
+                    return ((/^\+?(9{2})\)?(6)\)?([2-7])\)?([0-9]{8})$/).test(value));
+                },
+                message: 'Wrong number format'
+            }
+        ]
     },
     token: {
         type: String,
