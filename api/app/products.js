@@ -49,14 +49,17 @@ router.post('/', [auth, upload.single('image')], async (req, res) => {
     const { title, description, price, category} = req.body;
 
     try {
-        if (!title || !description || !price || !category || !req.file) {
-            return res.status(400).send({message: "Data not valid."});
-        }
+        // if (!req.file) {
+        //     return res.status(400).send({message: "Data not valid."});
+        // }
 
         const productData = {
             user: req.user._id,
-            title, description, price, category,
-            image: 'uploads/' + req.file.filename,
+            title: title || null,
+            description: description || null,
+            price: price || null,
+            category: category || null,
+            image: req.file ? 'uploads/' + req.file.filename : null,
         };
 
         const product = new Product(productData);
