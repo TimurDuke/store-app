@@ -4,12 +4,14 @@ import {loadFromLocalStorage, saveToLocalStorage} from "./localStorage";
 import axiosApi from "../axiosApi";
 import usersReducer from "./reducers/usersReducer";
 import categoriesReducer from "./reducers/categoriesReducer";
+import productsReducer from "./reducers/productsReducer";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
     users: usersReducer,
     categories: categoriesReducer,
+    products: productsReducer
 });
 
 const persistedState = loadFromLocalStorage();
