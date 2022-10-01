@@ -37,7 +37,14 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const product = await Product.findOne({_id: req.params.id}).populate("user");
+        const product = await Product
+            .findOne({_id: req.params.id})
+            .populate({path: "category", select: "title"})
+            .populate({path: 'user'});
+
+        if (!product) {
+            return res.status(404).send({error: "Product not found!"})
+        }
 
         res.send(product);
     } catch (e) {
@@ -49,10 +56,6 @@ router.post('/', [auth, upload.single('image')], async (req, res) => {
     const { title, description, price, category} = req.body;
 
     try {
-        // if (!req.file) {
-        //     return res.status(400).send({message: "Data not valid."});
-        // }
-
         const productData = {
             user: req.user._id,
             title: title || null,
