@@ -105,3 +105,27 @@ export const createProduct = productData => {
 
 export const CLEAR_PRODUCT_FORM_ERRORS = 'CLEAR_PRODUCT_FORM_ERRORS';
 export const clearProductFormErrors = () => ({type: CLEAR_PRODUCT_FORM_ERRORS});
+
+export const FETCH_CATEGORY_PRODUCTS_REQUEST = 'FETCH_CATEGORY_PRODUCTS_REQUEST';
+export const FETCH_CATEGORY_PRODUCTS_SUCCESS = 'FETCH_CATEGORY_PRODUCTS_SUCCESS';
+export const FETCH_CATEGORY_PRODUCTS_FAILURE = 'FETCH_CATEGORY_PRODUCTS_FAILURE';
+
+const fetchCategoryProductsRequest = () => ({type: FETCH_CATEGORY_PRODUCTS_REQUEST});
+const fetchCategoryProductsSuccess = products => ({type: FETCH_CATEGORY_PRODUCTS_SUCCESS, products});
+const fetchCategoryProductsFailure = error => ({type: FETCH_CATEGORY_PRODUCTS_FAILURE, error});
+
+export const fetchCategoryProducts = categoryId => {
+    return async dispatch => {
+        try {
+            dispatch(fetchCategoryProductsRequest());
+
+            const {data} = await axiosApi.get('/products?category=' + categoryId);
+
+            if (data) {
+                dispatch(fetchCategoryProductsSuccess(data));
+            }
+        } catch (e) {
+            dispatch(fetchCategoryProductsFailure(e));
+        }
+    };
+};

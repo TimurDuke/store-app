@@ -4,7 +4,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import {apiUrl} from "../../config";
 
-const SingleProduct = ({title, image, price, user, productUser, description, deactivateHandler}) => {
+const SingleProduct = ({title, image, price, user, productUser, description, deactivateHandler, category}) => {
     return (
         <Grid item xs={12} sm={10} md={8} lg={6}>
             <Card
@@ -63,6 +63,9 @@ const SingleProduct = ({title, image, price, user, productUser, description, dea
                             <span style={{color: "gray"}}>{productUser.phone}</span>
                         </Typography>
                     </Box>
+                    <Typography gutterBottom variant="body">
+                        Category <strong>{category.title}</strong>
+                    </Typography>
                     <Typography gutterBottom variant="h4">
                         <strong>{title}</strong>
                     </Typography>

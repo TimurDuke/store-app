@@ -1,8 +1,14 @@
 import {
-    CLEAR_PRODUCT_FORM_ERRORS, CREATE_PRODUCT_FAILURE, CREATE_PRODUCT_REQUEST, CREATE_PRODUCT_SUCCESS,
+    CLEAR_PRODUCT_FORM_ERRORS,
+    CREATE_PRODUCT_FAILURE,
+    CREATE_PRODUCT_REQUEST,
+    CREATE_PRODUCT_SUCCESS,
     DEACTIVATE_PRODUCT_FAILURE,
     DEACTIVATE_PRODUCT_REQUEST,
     DEACTIVATE_PRODUCT_SUCCESS,
+    FETCH_CATEGORY_PRODUCTS_FAILURE,
+    FETCH_CATEGORY_PRODUCTS_REQUEST,
+    FETCH_CATEGORY_PRODUCTS_SUCCESS,
     FETCH_PRODUCT_FAILURE,
     FETCH_PRODUCT_REQUEST,
     FETCH_PRODUCT_SUCCESS,
@@ -18,6 +24,7 @@ const initialState = {
     fetchError: null,
     deactivateError: null,
     createError: null,
+    categoryProductsError: null,
 };
 
 const reducer = (state = initialState, actions) => {
@@ -52,6 +59,13 @@ const reducer = (state = initialState, actions) => {
             return {...state, loading: false, createError: null};
         case CREATE_PRODUCT_FAILURE:
             return {...state, loading: false, createError: actions.error};
+
+        case FETCH_CATEGORY_PRODUCTS_REQUEST:
+            return {...state, loading: true, categoryProductsError: null};
+        case FETCH_CATEGORY_PRODUCTS_SUCCESS:
+            return {...state, loading: false, categoryProductsError: null, products: actions.products};
+        case FETCH_CATEGORY_PRODUCTS_FAILURE:
+            return {...state, loading: false, categoryProductsError: actions.error};
 
         default:
             return state;

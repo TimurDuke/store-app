@@ -25,6 +25,7 @@ const Product = ({match}) => {
                 image={product.image}
                 price={product.price}
                 description={product.description}
+                category={product.category}
                 deactivateHandler={() => deactivateHandler(product['_id'])}
                 user={user ? user : null}
                 productUser={product.user}

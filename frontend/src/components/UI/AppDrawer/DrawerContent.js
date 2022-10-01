@@ -9,6 +9,8 @@ import {
 } from "@mui/material";
 
 import {makeStyles} from "tss-react/mui";
+import {useDispatch} from "react-redux";
+import {fetchCategoryProducts, fetchProducts} from "../../../store/actions/productsActions";
 
 const useStyles = makeStyles()(theme => ({
     title: {
@@ -34,6 +36,12 @@ const DrawerHeader = styled('div')(({theme}) => ({
 const DrawerContent = ({categories}) => {
     const {classes} = useStyles();
 
+    const dispatch = useDispatch();
+
+    const findByCategoryHandler = id => {
+        dispatch(fetchCategoryProducts(id));
+    };
+
     return (
         <>
             <DrawerHeader>
@@ -45,14 +53,19 @@ const DrawerContent = ({categories}) => {
             <List>
                 <ListItem className={classes.item} disablePadding>
                     <ListItemButton>
-                        <Typography className={classes.itemText}>
+                        <Typography
+                            className={classes.itemText}
+                            onClick={() => dispatch(fetchProducts())}
+                        >
                             All products
                         </Typography>
                     </ListItemButton>
                 </ListItem>
                 {categories.map(category => (
                     <ListItem key={category['_id']} className={classes.item} disablePadding>
-                        <ListItemButton>
+                        <ListItemButton
+                            onClick={() => findByCategoryHandler(category['_id'])}
+                        >
                             <Typography className={classes.itemText}>
                                 {category.title}
                             </Typography>
