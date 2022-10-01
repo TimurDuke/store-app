@@ -3,10 +3,14 @@ import {Link} from "react-router-dom";
 import {AppBar, Grid, Toolbar, Typography} from "@mui/material";
 import 'react-toastify/dist/ReactToastify.css';
 import {ToastContainer} from "react-toastify";
+import {useSelector} from "react-redux";
 
+import UserMenu from "./Menu/UserMenu";
 import Anonymous from "./Menu/Anonymous";
 
 const AppToolBar = () => {
+    const user = useSelector(state => state.users.user);
+
     return (
         <>
             <AppBar sx={{padding: '10px 15px'}}>
@@ -23,7 +27,7 @@ const AppToolBar = () => {
                         </Typography>
                     </Grid>
                     <Grid item>
-                        <Anonymous/>
+                        {user ? <UserMenu user={user}/> : <Anonymous/>}
                     </Grid>
                 </Grid>
             </AppBar>
