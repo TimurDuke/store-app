@@ -3,11 +3,13 @@ import thunk from "redux-thunk";
 import {loadFromLocalStorage, saveToLocalStorage} from "./localStorage";
 import axiosApi from "../axiosApi";
 import usersReducer from "./reducers/usersReducer";
+import categoriesReducer from "./reducers/categoriesReducer";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-    users: usersReducer
+    users: usersReducer,
+    categories: categoriesReducer,
 });
 
 const persistedState = loadFromLocalStorage();

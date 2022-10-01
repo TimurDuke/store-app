@@ -1,10 +1,11 @@
 import React from 'react';
+import ProductsLayout from "../../components/UI/Layout/ProductsLayout";
 
 const Products = () => {
     return (
-        <div>
-            Products will be here
-        </div>
+        <ProductsLayout>
+            Some text
+        </ProductsLayout>
     );
 };
 
