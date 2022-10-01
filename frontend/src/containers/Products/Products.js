@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {Grid} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
+
 import {fetchProducts} from "../../store/actions/productsActions";
 import ProductItem from "../../components/ProductItem/ProductItem";
 import ProductsLayout from "../../components/UI/Layout/ProductsLayout";
@@ -10,7 +11,9 @@ const Products = () => {
     const dispatch = useDispatch();
 
     const products = useSelector(state => state.products.products);
-    const loading = useSelector(state => state.products.loading);
+    const productsLoading = useSelector(state => state.products.loading);
+    const categoriesLoading = useSelector(state => state.categories.loading);
+
 
     useEffect(() => {
         dispatch(fetchProducts());
@@ -19,7 +22,7 @@ const Products = () => {
     return (
         <>
             <Preloader
-                showPreloader={loading}
+                showPreloader={productsLoading || categoriesLoading}
             />
             <ProductsLayout>
                 {!!products.length ?

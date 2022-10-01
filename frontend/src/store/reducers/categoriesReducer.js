@@ -10,7 +10,7 @@ const initialState = {
     error: null,
 };
 
-const reducer = (state = initialState, actions) => {
+const categoriesReducer = (state = initialState, actions) => {
     switch(actions.type) {
         case FETCH_CATEGORIES_REQUEST:
             return {...state, loading: true, error: null};
@@ -24,4 +24,4 @@ const reducer = (state = initialState, actions) => {
     }
 };
 
-export default reducer;
+export default categoriesReducer;

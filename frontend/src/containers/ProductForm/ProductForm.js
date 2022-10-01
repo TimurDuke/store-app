@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {Button, FormControl, Grid, InputLabel, Select, Typography} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
-import FileInput from "../../components/UI/FileInput/FileInput";
-import FormElement from "../../components/UI/Form/FormElement/FormElement";
+import {Redirect} from "react-router-dom";
 import MenuItem from "@mui/material/MenuItem";
+
 import {clearProductFormErrors, createProduct} from "../../store/actions/productsActions";
 import {fetchCategories} from "../../store/actions/categoriesActions";
+import FileInput from "../../components/UI/FileInput/FileInput";
+import FormElement from "../../components/UI/Form/FormElement/FormElement";
 import Preloader from "../../components/UI/Preloader/Preloader";
-import {Redirect} from "react-router-dom";
 
 const ProductForm = () => {
     const dispatch = useDispatch();

@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
+import {Grid} from "@mui/material";
+
 import {deactivateProduct, fetchProduct} from "../../store/actions/productsActions";
 import SingleProduct from "../../components/SingleProduct/SingleProduct";
-import {Grid} from "@mui/material";
 import Preloader from "../../components/UI/Preloader/Preloader";
 
 const Product = ({match}) => {

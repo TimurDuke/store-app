@@ -6,6 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import {Box} from "@mui/material";
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import {useDispatch} from "react-redux";
+
 import {logoutUser} from "../../../../store/actions/usersActions";
 import {Link} from "react-router-dom";
 
