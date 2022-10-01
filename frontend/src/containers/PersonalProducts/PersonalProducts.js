@@ -17,7 +17,7 @@ const PersonalProducts = () => {
 
     useEffect(() => {
         dispatch(fetchPersonalProducts());
-    }, []);
+    }, [dispatch]);
 
     if (!user) {
         return <Redirect to='/login'/>;
