@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const {nanoid} = require('nanoid');
 
-const {Schema, model} = mongoose;
+const { Schema, model } = mongoose;
 
 const SALT_WORK_FACTOR = 10;
 
