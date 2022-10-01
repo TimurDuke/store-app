@@ -5,7 +5,7 @@ import Products from "./containers/Products/Products";
 import Register from "./containers/Register/Register";
 import Login from "./containers/Login/Login";
 import Product from "./containers/Product/Product";
-import ProductForm from "./components/ProductForm/ProductForm";
+import ProductForm from "./containers/ProductForm/ProductForm";
 
 const App = () => {
     return (
