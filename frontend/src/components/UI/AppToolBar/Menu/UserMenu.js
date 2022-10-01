@@ -5,8 +5,12 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import {Box} from "@mui/material";
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
+import {useDispatch} from "react-redux";
+import {logoutUser} from "../../../../store/actions/usersActions";
 
 const UserMenu = ({user}) => {
+    const dispatch = useDispatch();
+
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
 
@@ -50,7 +54,7 @@ const UserMenu = ({user}) => {
             >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={() => dispatch(logoutUser())}>Logout</MenuItem>
             </Menu>
         </div>
     );
