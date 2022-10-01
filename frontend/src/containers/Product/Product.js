@@ -3,11 +3,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {deactivateProduct, fetchProduct} from "../../store/actions/productsActions";
 import SingleProduct from "../../components/SingleProduct/SingleProduct";
 import {Grid} from "@mui/material";
+import Preloader from "../../components/UI/Preloader/Preloader";
 
 const Product = ({match}) => {
     const dispatch = useDispatch();
 
     const product = useSelector(state => state.products.product);
+    const loading = useSelector(state => state.products.loading);
     const user = useSelector(state => state.users.user);
 
     useEffect(() => {
@@ -18,19 +20,24 @@ const Product = ({match}) => {
         dispatch(deactivateProduct(id));
     };
 
-    return product && (
-        <Grid container justifyContent='center'>
-            <SingleProduct
-                title={product.title}
-                image={product.image}
-                price={product.price}
-                description={product.description}
-                category={product.category}
-                deactivateHandler={() => deactivateHandler(product['_id'])}
-                user={user ? user : null}
-                productUser={product.user}
+    return (
+        <>
+            <Preloader
+                showPreloader={loading}
             />
-        </Grid>
+            {product ? <Grid container justifyContent='center'>
+                <SingleProduct
+                    title={product.title}
+                    image={product.image}
+                    price={product.price}
+                    description={product.description}
+                    category={product.category}
+                    deactivateHandler={() => deactivateHandler(product['_id'])}
+                    user={user ? user : null}
+                    productUser={product.user}
+                />
+            </Grid> : null}
+        </>
     );
 };
 

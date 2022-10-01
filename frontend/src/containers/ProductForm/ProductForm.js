@@ -7,9 +7,12 @@ import MenuItem from "@mui/material/MenuItem";
 import {clearProductFormErrors, createProduct} from "../../store/actions/productsActions";
 import {fetchCategories} from "../../store/actions/categoriesActions";
 import Preloader from "../../components/UI/Preloader/Preloader";
+import {Redirect} from "react-router-dom";
 
 const ProductForm = () => {
     const dispatch = useDispatch();
+
+    const user = useSelector(state => state.users.user);
 
     const categories = useSelector(state => state.categories.categories);
     const error = useSelector(state => state.products.createError);
@@ -80,6 +83,10 @@ const ProductForm = () => {
             return undefined;
         }
     };
+
+    if (!user) {
+        return <Redirect to='/login'/>;
+    }
 
     return (
         <>

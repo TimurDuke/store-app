@@ -129,3 +129,28 @@ export const fetchCategoryProducts = categoryId => {
         }
     };
 };
+
+export const FETCH_PERSONAL_PRODUCTS_REQUEST = 'FETCH_PERSONAL_PRODUCTS_REQUEST';
+export const FETCH_PERSONAL_PRODUCTS_SUCCESS = 'FETCH_PERSONAL_PRODUCTS_SUCCESS';
+export const FETCH_PERSONAL_PRODUCTS_FAILURE = 'FETCH_PERSONAL_PRODUCTS_FAILURE';
+
+const fetchPersonalProductsRequest = () => ({type: FETCH_PERSONAL_PRODUCTS_REQUEST});
+const fetchPersonalProductsSuccess = products => ({type: FETCH_PERSONAL_PRODUCTS_SUCCESS, products});
+const fetchPersonalProductsFailure = error => ({type: FETCH_PERSONAL_PRODUCTS_FAILURE, error});
+
+
+export const fetchPersonalProducts = () => {
+    return async dispatch => {
+        try {
+            dispatch(fetchPersonalProductsRequest());
+
+            const {data} = await axiosApi.post('/products/personal');
+
+            if (data) {
+                dispatch(fetchPersonalProductsSuccess(data));
+            }
+        } catch (e) {
+            dispatch(fetchPersonalProductsFailure(e));
+        }
+    };
+};

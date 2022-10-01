@@ -21,19 +21,21 @@ const Products = () => {
             <Preloader
                 showPreloader={loading}
             />
-            {!!products.length ? <ProductsLayout>
-                <Grid container spacing={2}>
-                    {!!products.length ? products.map(product => (
-                        <ProductItem
-                            key={product['_id']}
-                            title={product.title}
-                            image={product.image}
-                            price={product.price}
-                            id={product['_id']}
-                        />
-                    )) : null}
-                </Grid>
-            </ProductsLayout> : null}
+            <ProductsLayout>
+                {!!products.length ?
+                    <Grid container spacing={2}>
+                        {products.map(product => (
+                            <ProductItem
+                                key={product['_id']}
+                                title={product.title}
+                                image={product.image}
+                                price={product.price}
+                                id={product['_id']}
+                            />
+                        ))}
+                    </Grid>
+                    : <h2 style={{textAlign: 'center'}}>There are no products in this category.</h2>}
+            </ProductsLayout>
         </>
     );
 };

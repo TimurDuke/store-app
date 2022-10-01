@@ -9,6 +9,9 @@ import {
     FETCH_CATEGORY_PRODUCTS_FAILURE,
     FETCH_CATEGORY_PRODUCTS_REQUEST,
     FETCH_CATEGORY_PRODUCTS_SUCCESS,
+    FETCH_PERSONAL_PRODUCTS_FAILURE,
+    FETCH_PERSONAL_PRODUCTS_REQUEST,
+    FETCH_PERSONAL_PRODUCTS_SUCCESS,
     FETCH_PRODUCT_FAILURE,
     FETCH_PRODUCT_REQUEST,
     FETCH_PRODUCT_SUCCESS,
@@ -19,12 +22,14 @@ import {
 
 const initialState = {
     products: [],
+    personalProducts: [],
     product: null,
     loading: false,
     fetchError: null,
     deactivateError: null,
     createError: null,
     categoryProductsError: null,
+    personalProductsError: null,
 };
 
 const reducer = (state = initialState, actions) => {
@@ -67,6 +72,12 @@ const reducer = (state = initialState, actions) => {
         case FETCH_CATEGORY_PRODUCTS_FAILURE:
             return {...state, loading: false, categoryProductsError: actions.error};
 
+        case FETCH_PERSONAL_PRODUCTS_REQUEST:
+            return {...state, loading: true, personalProductsError: null};
+        case FETCH_PERSONAL_PRODUCTS_SUCCESS:
+            return {...state, loading: false, personalProductsError: null, personalProducts: actions.products};
+        case FETCH_PERSONAL_PRODUCTS_FAILURE:
+            return {...state, loading: false, personalProductsError: actions.error};
         default:
             return state;
     }

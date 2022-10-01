@@ -7,6 +7,7 @@ import {Box} from "@mui/material";
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import {useDispatch} from "react-redux";
 import {logoutUser} from "../../../../store/actions/usersActions";
+import {Link} from "react-router-dom";
 
 const UserMenu = ({user}) => {
     const dispatch = useDispatch();
@@ -31,6 +32,14 @@ const UserMenu = ({user}) => {
                     alignItems: 'center'
                 }}
             >
+                <Button
+                    variant='outlined'
+                    color='inherit'
+                    component={Link}
+                    to='/personal/products'
+                >
+                    My products
+                </Button>
                 <Button
                     id="basic-button"
                     color="inherit"
