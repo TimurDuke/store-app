@@ -1,6 +1,6 @@
 import axiosApi from "../../axiosApi";
 import {historyPush} from "./historyActions";
-import {useToastSuccess} from "../../hooks";
+import {useToastInfo, useToastSuccess} from "../../hooks";
 
 export const CLEAR_REGISTER_ERRORS = 'CLEAR_REGISTER_ERRORS';
 export const clearRegisterErrors = () => ({type: CLEAR_REGISTER_ERRORS});
@@ -46,6 +46,8 @@ export const logoutUser = () => {
             await axiosApi.delete('users/sessions');
 
             dispatch({type: LOGOUT_USER});
+            useToastInfo('You have successfully logged out!');
+
             dispatch(historyPush('/'));
         } catch (e) {
             console.error(e);
