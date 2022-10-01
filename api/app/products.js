@@ -52,6 +52,16 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.post('/personal', auth, async (req, res) => {
+    try {
+        const products = await Product.find({user: req.user['_id']}).populate('category', 'title');
+
+        res.send(products);
+    } catch {
+        res.sendStatus(500);
+    }
+});
+
 router.post('/', [auth, upload.single('image')], async (req, res) => {
     const { title, description, price, category} = req.body;
 
