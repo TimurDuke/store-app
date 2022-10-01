@@ -46,7 +46,10 @@ const AppDrawer = () => {
                     '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWith},
                 }}
             >
-                <DrawerContent categories={categories}/>
+                <DrawerContent
+                    categories={categories}
+                    drawerToggle={handleDrawerToggle}
+                />
             </Drawer>
             <Drawer
                 variant='permanent'

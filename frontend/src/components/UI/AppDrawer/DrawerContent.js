@@ -33,7 +33,7 @@ const DrawerHeader = styled('div')(({theme}) => ({
     justifyContent: 'space-between',
 }));
 
-const DrawerContent = ({categories}) => {
+const DrawerContent = ({categories, drawerToggle}) => {
     const {classes} = useStyles();
 
     const dispatch = useDispatch();
@@ -50,12 +50,12 @@ const DrawerContent = ({categories}) => {
                 </Typography>
             </DrawerHeader>
             <Divider/>
-            <List>
+            <List sx={{padding: '0'}}>
                 <ListItem className={classes.item} disablePadding>
-                    <ListItemButton>
+                    <ListItemButton onClick={() => dispatch(fetchProducts())}>
                         <Typography
                             className={classes.itemText}
-                            onClick={() => dispatch(fetchProducts())}
+                            onClick={drawerToggle}
                         >
                             All products
                         </Typography>
@@ -65,8 +65,13 @@ const DrawerContent = ({categories}) => {
                     <ListItem key={category['_id']} className={classes.item} disablePadding>
                         <ListItemButton
                             onClick={() => findByCategoryHandler(category['_id'])}
+                            sx={{padding: '0'}}
                         >
-                            <Typography className={classes.itemText}>
+                            <Typography
+                                onClick={drawerToggle}
+                                className={classes.itemText}
+                                sx={{width: '100%', padding: '8px 16px'}}
+                            >
                                 {category.title}
                             </Typography>
                         </ListItemButton>
