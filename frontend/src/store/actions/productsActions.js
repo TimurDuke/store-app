@@ -73,3 +73,35 @@ export const deactivateProduct = productId => {
         }
     };
 };
+
+export const CREATE_PRODUCT_REQUEST = 'CREATE_PRODUCT_REQUEST';
+export const CREATE_PRODUCT_SUCCESS = 'CREATE_PRODUCT_SUCCESS';
+export const CREATE_PRODUCT_FAILURE = 'CREATE_PRODUCT_FAILURE';
+
+const createProductRequest = () => ({type: CREATE_PRODUCT_REQUEST});
+const createProductSuccess = () => ({type: CREATE_PRODUCT_SUCCESS});
+const createProductFailure = error => ({type: CREATE_PRODUCT_FAILURE, error});
+
+export const createProduct = productData => {
+    return async dispatch => {
+        try {
+            dispatch(createProductRequest());
+
+            await axiosApi.post('/products', productData);
+
+            dispatch(createProductSuccess());
+            useToastInfo('The product has been successfully created.');
+
+            dispatch(historyPush('/'))
+        } catch (e) {
+            if (e.response && e.response.data) {
+                dispatch(createProductFailure(e.response.data));
+            } else {
+                dispatch(createProductFailure({global: 'No internet'}));
+            }
+        }
+    };
+};
+
+export const CLEAR_PRODUCT_FORM_ERRORS = 'CLEAR_PRODUCT_FORM_ERRORS';
+export const clearProductFormErrors = () => ({type: CLEAR_PRODUCT_FORM_ERRORS});
